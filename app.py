@@ -2,19 +2,21 @@ from flask import Flask, render_template, request
 
 from flask_sqlalchemy import SQLAlchemy
 
+from decouple import config
 from send_mail import send_mail
+
 
 app=Flask(__name__)
 
 
-ENV="prod"
+ENV="dev"
 
 if ENV == "dev":
     app.debug=True
-    app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://postgres:password@localhost/lexus"
+    app.config['SQLALCHEMY_DATABASE_URI'] =config('POSTGRES_LOCAL_URI')
 else:
     app.debug=False
-    app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://ipumrcvvkqxrbl:4bfe520aa562cb3269b4bfcba21fa2069e6d94a3abbbdc37b260e29abb76f56f@ec2-3-219-52-220.compute-1.amazonaws.com:5432/dbihm5sk7q22up"
+    app.config['SQLALCHEMY_DATABASE_URI'] =config('POSTGRES_HEROKU_URI')
     
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
