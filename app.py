@@ -8,14 +8,14 @@ from send_mail import send_mail
 app=Flask(__name__)
 
 
-ENV="dev"
+ENV="prod"
 
 if ENV == "dev":
     app.debug=True
     app.config['SQLALCHEMY_DATABASE_URI'] ="postgresql://postgres:password@localhost/lexus"
 else:
     app.debug=False
-    app.config['SQLALCHEMY_DATABASE_URI'] =""
+    app.config['SQLALCHEMY_DATABASE_URI'] ="postgres://ipumrcvvkqxrbl:4bfe520aa562cb3269b4bfcba21fa2069e6d94a3abbbdc37b260e29abb76f56f@ec2-3-219-52-220.compute-1.amazonaws.com:5432/dbihm5sk7q22up"
     
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 
